@@ -1,0 +1,61 @@
+<h1>
+  List : <%= @list.name %>
+</h1>
+
+<h3>
+  All movies form this list :
+</h3>
+<ul>
+  <% @list.movies.each do |movie| %>
+  <li>
+    <%= movie.title %> | rated : <%= movie.rating %> <br/>"<i><%= movie.overview %></i>"
+    <%= image_tag movie.poster_url %>
+  </li>
+  <% end %>
+</ul>
+
+<h3>
+  All bookmarks from this list :
+</h3>
+<ul>
+  <% @list.bookmarks.each do |bookmark| %>
+  <li>
+    <%= bookmark.movie.title %> :
+    "<i><%= bookmark.comment %></i>"
+    <%= link_to 'X', list_bookmark_path(@list, bookmark), data: { turbo_method: :delete } %>
+  </li>
+  <% end %>
+</ul>
+
+<%= link_to 'Back to all lists', lists_path %>
+
+<h3>
+  Create a new bookmark to add a movie to this list
+</h3>
+<%= simple_form_for([@list, @bookmark]) do |f| %>
+  <%= f.input :comment %>
+  <%= f.association :movie %>
+  <%= f.submit %>
+<% end %>
+
+<h3>
+  All reviews from this list :
+</h3>
+<ul>
+  <% @list.reviews.each do |review| %>
+  <li>
+    <%= review.rating %> :
+    "<i><%= review.comment %></i>"
+    <%= link_to 'X', list_review_path(@list, review), data: { turbo_method: :delete } %>
+  </li>
+  <% end %>
+</ul>
+
+<h3>
+  Create a new review for this list
+</h3>
+<%= simple_form_for([@list, @review]) do |f| %>
+  <%= f.input :comment %>
+  <%= f.input :rating %>
+  <%= f.submit %>
+<% end %>

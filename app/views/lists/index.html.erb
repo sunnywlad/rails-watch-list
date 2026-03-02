@@ -1,0 +1,11 @@
+<h1>
+  All lists
+</h1>
+
+<div class="list-group">
+  <% @lists.each do |list| %>
+  <a href="/lists/<%= list.id %>" class="list-group-item list-group-item-action"><%= list.name %></a>
+  <% end %>
+</ul>
+
+<%= link_to 'Create a new list', new_list_path %>
