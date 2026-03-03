@@ -25,9 +25,18 @@
     <div class="square"></div>
     <div class="card-product-infos">
       <p id="new_list_title">Add a new list</p>
-      <%= simple_form_for(@list) do |f| %>
-      <%= f.input :name, label: "name :", placeholder: "all-time favorites", label_html: { class: "card-productp" }, input_html: { style: "font-style: italic;" } %>
-      <%= f.button :submit, "Create list", class: "btn btn-outline-dark" %>
+      <%= simple_form_for @list, html: { class: "d-flex gap-4 align-items-end" } do |f| %>
+      <%= f.input :name,
+                  label: "name :",
+                  placeholder: "all-time favorites",
+                  label_html: { class: "card-productp" },
+                  input_html: { style: "font-style: italic;" },
+                  wrapper_html: { class: "mb-0" } %>
+      <%= f.input :photo, as: :file,
+                  label: "cover image :",
+                  label_html: { class: "card-productp" },
+                  wrapper_html: { class: "mb-0" } %>
+      <%= f.button :submit, "Create list", class: "btn btn-outline-dark mb-3" %>
       <% end %>
     </div>
   </div>
@@ -46,4 +55,3 @@
     This footer is made with <i class="fas fa-heart"></i> at Le Wagon
   </div>
 </div>
-
