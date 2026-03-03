@@ -7,7 +7,9 @@
     <% last_movie = list.movies.last %>
     <% last_review = list.reviews.last %>
     <div class="card-product">
-      <% if !last_movie.nil? %>
+      <% if list.photo.attached? %>
+        <%= cl_image_tag list.photo.key, height: 200, width: 200, crop: :fill %>
+      <% elsif !last_movie.nil? %>
         <img src= <%= last_movie.poster_url %> />
       <% else %>
         <div class="square"></div>
@@ -25,7 +27,7 @@
     <div class="square"></div>
     <div class="card-product-infos">
       <p id="new_list_title">Add a new list</p>
-      <%= simple_form_for @list, html: { class: "d-flex gap-4 align-items-end" } do |f| %>
+      <%= simple_form_for @list, html: { class: "d-flex gap-4 align-items-end", multipart: true } do |f| %>
       <%= f.input :name,
                   label: "name :",
                   placeholder: "all-time favorites",
