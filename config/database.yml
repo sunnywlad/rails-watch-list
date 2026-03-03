@@ -78,7 +78,9 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
+  # <<: *default
+  # database: rails_watch_list_production
+  # username: rails_watch_list
+  # password: <%= ENV["RAILS_WATCH_LIST_DATABASE_PASSWORD"] %>
   <<: *default
-  database: rails_watch_list_production
-  username: rails_watch_list
-  password: <%= ENV["RAILS_WATCH_LIST_DATABASE_PASSWORD"] %>
+  url: <%= ENV["DATABASE_URL"] %>

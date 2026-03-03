@@ -2,33 +2,48 @@
   Movie lists
 </div>
 
-<div class="">
+<div class="mb-4">
   <% @lists.each do |list| %>
-    <div>
-      <% last_movie = list.movies.last %>
-      <% last_review = list.reviews.last %>
-      <div class="card-product">
-        <% if !last_movie.nil? %>
-          <img src= <%= last_movie.poster_url %> />
-        <% else %>
-          <div class="square"></div>
+    <% last_movie = list.movies.last %>
+    <% last_review = list.reviews.last %>
+    <div class="card-product">
+      <% if !last_movie.nil? %>
+        <img src= <%= last_movie.poster_url %> />
+      <% else %>
+        <div class="square"></div>
+      <% end %>
+      <div class="card-product-infos">
+        <a href="/lists/<%= list.id %>"> <%= list.name %> </a>
+        <% if !last_review.nil? %>
+          <p>last review : "<i><%= last_review.comment %></i>" </p>
         <% end %>
-        <div class="card-product-infos">
-          <a href="/lists/<%= list.id %>"> <%= list.name %> </a>
-          <% if !last_review.nil? %>
-            <p>last review : "<i><%= last_review.comment %></i>" </p>
-          <% end %>
-        </div>
       </div>
     </div>
   <% end %>
+
+  <div class="card-product">
+    <div class="square"></div>
+    <div class="card-product-infos">
+      <p id="new_list_title">Add a new list</p>
+      <%= simple_form_for(@list) do |f| %>
+      <%= f.input :name, label: "name :", placeholder: "all-time favorites", label_html: { class: "card-productp" }, input_html: { style: "font-style: italic;" } %>
+      <%= f.button :submit, "Create list", class: "btn btn-outline-dark" %>
+      <% end %>
+    </div>
+  </div>
+
 </div>
 
-<h1>
-  Add a new list
-</h1>
+<div class="footer">
+  <div class="footer-links">
+    <a href="#"><i class="fab fa-github"></i></a>
+    <a href="#"><i class="fab fa-instagram"></i></a>
+    <a href="#"><i class="fab fa-facebook"></i></a>
+    <a href="#"><i class="fab fa-twitter"></i></a>
+    <a href="#"><i class="fab fa-linkedin"></i></a>
+  </div>
+  <div class="footer-copyright">
+    This footer is made with <i class="fas fa-heart"></i> at Le Wagon
+  </div>
+</div>
 
-<%= simple_form_for(@list) do |f| %>
-  <%= f.input :name %>
-  <%= f.submit %>
-<% end %>
